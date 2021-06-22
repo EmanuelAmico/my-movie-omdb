@@ -1,0 +1,26 @@
+.carousel-item-detail {
+  display: flex;
+  justify-content: center;
+  color: white;
+  padding: 0rem 10rem 0rem 10rem;
+  font-size: 1.6rem;
+  position: relative;
+  margin-bottom: 22rem;
+}
+
+.carousel-item-detail ul {
+  align-self: center;
+}
+
+.carousel-item-detail i {
+  font-size: 3.5rem;
+  color: white;
+  vertical-align: middle;
+  position: absolute;
+  top: 1.5rem;
+  left: 5rem;
+}
+
+.carousel-item-detail p{
+  margin-left: 1rem;
+}
