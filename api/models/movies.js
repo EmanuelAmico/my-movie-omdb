@@ -4,6 +4,13 @@ const db = require("../db");
 class Movies extends S.Model {}
 
 Movies.init({
+  userId: {
+    type: S.INTEGER,
+  },
+  imdbID: {
+    type: S.STRING,
+    allowNull: false,
+  },
   Title: {
     type: S.STRING,
     allowNull: false,
@@ -36,10 +43,6 @@ Movies.init({
     type: S.STRING,
     allowNull: false,
   },
-  imdbID: {
-    type: S.STRING,
-    allowNull: false,
-  }
 }, {sequelize: db, modelName: "movies", timestamps: false})
 
 module.exports = Movies
