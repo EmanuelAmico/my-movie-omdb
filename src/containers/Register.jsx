@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import "../assets/styles/components/Register.scss"
-import { setUser } from '../redux/user'
 
 const Register = () => {
   const history = useHistory()
+
+  const user = useSelector(state => state.user)
 
   const [form, setForm] = useState({
     name: "",

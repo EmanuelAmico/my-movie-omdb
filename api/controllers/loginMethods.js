@@ -17,7 +17,7 @@ const postLoginUser = async (req, res, next) => {
       
     //si pasó todas estas validaciones, generamos el token, con el primer parametro seleccionamos que info queremos hashear (el payload) y en el segundo la secret key que despues nos va a servir para deshashear el payload
     //NOTE yo seteo el req.tokenPayload = payload en auth.js es el primer parámetro y acá defino que es ese payload
-    const token = jwt.sign({userId: user.id}, "plataforma5")
+    const token = jwt.sign({ userId: user.id }, "plataforma5")
 
     return res.status(200).send({ token })
   } catch (error) {

@@ -16,27 +16,41 @@ const Login = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
+    rememberMe: false,
   })
 
   const handleSubmit = e => {
     e.preventDefault();
-    axios.post('/api/login', form)
+    const { email, password, rememberMe } = form
+    axios.post('/api/login', { email, password })
       .then(res => res.data)
       .then(({ token }) => {
-        localStorage.setItem('userToken', token)
-        dispatch(setUser({isLoggedIn: true, token: token}))
+        if(rememberMe)
+          localStorage.setItem('userToken', token)
+        dispatch(setUser({ ...user, isLoggedIn: true, token }))
         alert("Se ha logueado con éxito.")
         history.push('/')
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        //NOTE Sí el response status es del 400 en adelante cae acá el axios
+        //TODO chequear sí para status de >300 cae acá también
+        /* console.log(error) */
+        if(error.response.status === 400 || 401)
+          alert("Credenciales inválidas")
+      })
   }
-
-  
 
   const handleInput = e => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const handleCheck = e => {
+    setForm({
+      ...form,
+      [e.target.name] : e.target.checked
     })
   }
 
@@ -51,9 +65,8 @@ const Login = () => {
           <button className="button">Iniciar sesión</button>
           <div className="login__container--remember-me">
             <label>
-              <input type="checkbox" id="cbox1" value="first_checkbox"/>Recuérdame
+              <input type="checkbox" name="rememberMe" onChange={handleCheck} />Recuérdame
             </label>
-            <a href="/">Olvidé mi contraseña</a>
           </div>
         </form>
         <section className="login__container--social-media">

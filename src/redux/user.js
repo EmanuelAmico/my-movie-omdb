@@ -6,7 +6,14 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 const setUser = createAction("SET_USER")
 
 // Reducer
-const userReducer = createReducer({isLoggedIn: !!localStorage.getItem('userToken'), token: localStorage.getItem('userToken')}, {
+const initialState = {
+  isLoggedIn: !!localStorage.getItem('userToken'),
+  name: null,
+  email: null,
+  token: localStorage.getItem('userToken'),
+}
+
+const userReducer = createReducer(initialState, {
   [setUser] : (state, action) => action.payload
 })
 

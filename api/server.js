@@ -25,7 +25,7 @@ app.use((error, req, res, next) =>{
 //TODO Preguntar si esta forma de levantar el server con async/await está bien
 const deployServer = async () =>{
   try{
-    await db.sync({force: true})
+    await db.sync({force: false})
     const port = 3001
     app.listen(port, () =>{
       console.log(`Server running on http://localhost/${port}`)

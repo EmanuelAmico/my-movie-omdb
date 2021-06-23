@@ -7,15 +7,8 @@ import NotFound from "../components/NotFound";
 import Layout from "../components/Layout";
 import SearchResults from "../components/SearchResults";
 import CarouselItemDetail from "../components/CarouselItemDetail";
-import axios from "axios";
-import { useSelector } from "react-redux";
 
 const App = () => {
-  //FIXME Me parece que esto no anda :c
-  // Config de headers de axios para todos los pedidos
-  const token = useSelector(state => state.user.token)
-  axios.defaults.headers.common['authorization'] = token;
-
   return (
     <BrowserRouter>
       <Layout>
