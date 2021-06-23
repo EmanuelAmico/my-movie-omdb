@@ -1,13 +1,12 @@
 const express = require("express")
-const { getUsers, postUser } = require("../controllers")
+const { getUsers } = require("../controllers")
+const checkToken = require("../middlewares/jwt")
 const router = express.Router()
 
 //------------------------ GET ------------------------//
-router.get('/', getUsers)
+router.get('/', checkToken, getUsers)
 
 
-//------------------------ POST ------------------------//
-router.post('/', postUser)
 
 
 
