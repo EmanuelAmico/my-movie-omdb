@@ -1,19 +1,37 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import googleIcon from "../assets/static/google-icon.png"
 import twitterIcon from "../assets/static/twitter-icon.png"
 import "../assets/styles/components/Login.scss"
+import { setUser } from '../redux/user';
 
 const Login = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+
+  const user = useSelector(state => state.user)
+
   const [form, setForm] = useState({
     email: "",
+    password: "",
   })
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(form);
-    /* history.push('/') */
+    axios.post('/api/login', form)
+      .then(res => res.data)
+      .then(({ token }) => {
+        localStorage.setItem('userToken', token)
+        dispatch(setUser({isLoggedIn: true, token: token}))
+        alert("Se ha logueado con éxito.")
+        history.push('/')
+      })
+      .catch(error => console.log(error))
   }
+
+  
 
   const handleInput = e => {
     setForm({

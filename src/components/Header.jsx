@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../assets/static/logo-omdb.svg";
 import userIcon from "../assets/static/user-icon.png";
 import "../assets/styles/components/Header.scss"
 
-const Header = (props) => {
-  const { user, logoutRequest, isLogin, isRegister } = props;
-  //isLogin y isRegister nos van a servir para saber donde estamos parados y que css se tiene que mostrar
+const Header = () => { 
 
-  const hasUser = false
-  
+  const user = useSelector(state => state.user)
+  const {isLoggedIn} = user
+
+  const handleLogOut = () => {}
+
   return (
   <header className="header">
     <Link to="/">
@@ -23,12 +25,12 @@ const Header = (props) => {
       </div>
       <ul>
         <li>
-          <Link to={hasUser ? "/" : "/login"}>{hasUser ? "Email del usuario" : "Cuenta"}</Link>
+          <Link to={isLoggedIn ? "/" : "/login"}>{isLoggedIn ? "Email del usuario" : "Cuenta"}</Link>
         </li>
         <li>
-          {!hasUser 
+          {!isLoggedIn 
             ? <Link to="/login">Iniciar Sesión</Link>
-            : <a href="#logout" onClick={handleLogout}>Cerrar Sesión</a>
+            : <a href="#logout" onClick={handleLogOut}>Cerrar Sesión</a>
           }
         </li>
       </ul>

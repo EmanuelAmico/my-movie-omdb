@@ -10,6 +10,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("app")
 );
-
-
-{/* <h1>Open Movie Data Base</h1> */}

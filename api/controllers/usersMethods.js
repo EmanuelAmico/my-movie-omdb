@@ -13,6 +13,16 @@ const getUsers = async (req, res, next) => {
   }
 }
 
+const getSelf = async (req, res, next) => {
+  try {
+    const { userId } = req.tokenPayload
+    const user = await Users.findByPk(userId)
+    res.status(200).send(user)
+  } catch (error) {
+    next(error)
+  }
+}
+
 const getSelfFavoriteMovies = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload
@@ -72,8 +82,11 @@ const deleteFavoriteMovie = async (req, res, next) => {
 
 module.exports = {
   getUsers,
+  getSelf,
   getFavoriteMovies,
   getSelfFavoriteMovies,
   postFavoriteMovie,
   deleteFavoriteMovie,
 }
+
+//TODO fixear las respuestas para que no incluyan información de más o data sensible como el salt y la password hasheada

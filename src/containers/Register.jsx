@@ -1,8 +1,13 @@
+import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
 import "../assets/styles/components/Register.scss"
+import { setUser } from '../redux/user'
 
-const Register = ({ history }) => {
+const Register = () => {
+  const history = useHistory()
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -11,8 +16,14 @@ const Register = ({ history }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(form)
-    /* history.push('/') */
+    /* console.log(form) */
+    axios.post('/api/register', form)
+      .then(res => res.data)
+      .then(user => {
+        alert("El usuario se creó con éxito.")
+        history.push('/login')
+      })
+      .catch(error => console.log(error))
   }
 
   const handleInput = e => {
