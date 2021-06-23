@@ -32,9 +32,7 @@ const Login = () => {
         history.push('/')
       })
       .catch(error => {
-        //NOTE Sí el response status es del 400 en adelante cae acá el axios
-        //TODO chequear sí para status de >300 cae acá también
-        /* console.log(error) */
+        //NOTE Sí el response status es del 300 en adelante cae acá el axios
         if(error.response.status === 400 || 401)
           alert("Credenciales inválidas")
       })

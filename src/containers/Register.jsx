@@ -24,7 +24,12 @@ const Register = () => {
         alert("El usuario se creó con éxito.")
         history.push('/login')
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        if(error.response.status === 302){
+          alert("El email ya está registrado. Olvidaste tu contraseña?")
+          history.push('/login')
+        }
+      })
   }
 
   const handleInput = e => {
