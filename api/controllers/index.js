@@ -1,5 +1,6 @@
-/* const express = require("express") */ // mepa que no hace falta
 const { Users } = require("../models")
+
+//------------------------ GET ------------------------//
 
 const getUsers = async (req, res, next) => {
   try {
@@ -10,6 +11,18 @@ const getUsers = async (req, res, next) => {
   }
 }
 
+//------------------------ POST ------------------------//
+
+const postUser = async (req, res, next) => {
+  try {
+    const createdUser = await Users.create(req.body)
+    res.status(201).send(createdUser)
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   getUsers,
+  postUser
 }

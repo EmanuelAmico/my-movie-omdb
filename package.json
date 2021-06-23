@@ -1,6 +1,7 @@
 {
   "name": "25-omdb",
-  "version": "0.1.0",
+  "author": "Alex Emanuel Amico",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.0",
@@ -8,6 +9,8 @@
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
     "react": "^17.0.2",
@@ -16,34 +19,13 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "redux": "^4.1.0",
-    "sequelize": "^6.6.2",
-    "volleyball": "^1.5.1"
+    "sequelize": "^6.6.2"
   },
   "scripts": {
     "start": "nodemon api/server.js & webpack serve --mode development --env development",
     "server": "nodemon api/server.js",
     "client": "webpack serve --mode development --env development",
-    "build": "webpack --mode  production",
-    "seed": "node api/seed"
-  },
-  "proxy": "http://localhost:3001",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "build": "webpack --mode  production"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

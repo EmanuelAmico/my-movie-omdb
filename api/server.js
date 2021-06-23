@@ -1,17 +1,19 @@
 const express = require("express")
-const volleyball = require("volleyball")
-const db = require("./db")
+const morgan = require("morgan");
 const {red} = require("chalk")
+const db = require("./db")
 const routes = require('./routes')
 
 const app = express()
 
 // Configs
-app.use(volleyball)
+app.use(morgan("dev"))
 app.use(express.json()) //Para los GET no hace falta pero para los POST sí :)
+app.use(express.urlencoded({ extended: false })); //Para que funcionen los formularios del front
+
 
 //Routes
-app.use("/", routes)
+app.use("/api", routes)
 
 // Error Middleware
 app.use((error, req, res, next) =>{
@@ -20,7 +22,7 @@ app.use((error, req, res, next) =>{
   res.sendStatus(500)
 })
 
-// Preguntar si esta forma de levantar el server con async/await está bien
+//TODO Preguntar si esta forma de levantar el server con async/await está bien
 const deployServer = async () =>{
   try{
     await db.sync({force: true})
