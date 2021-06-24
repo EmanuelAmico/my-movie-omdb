@@ -23,7 +23,12 @@ const Header = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem('userToken')
-    dispatch(setUser({isLoggedIn: false, name: null, email: null, token: null,}))
+    dispatch(setUser({
+      isLoggedIn: false,
+      name: null,
+      email: null,
+      token: null,
+    }))
   }
 
   return (

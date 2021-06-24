@@ -7,8 +7,6 @@ import "../assets/styles/components/Register.scss"
 const Register = () => {
   const history = useHistory()
 
-  const user = useSelector(state => state.user)
-
   const [form, setForm] = useState({
     name: "",
     email: "",

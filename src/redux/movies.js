@@ -30,7 +30,8 @@ const getSpecificMovie = createAsyncThunk('GET_SPECIFIC_MOVIE', (imdbID) => {
 // Reducer
 const specificMovieReducer = createReducer({}, {
   [getSpecificMovie.fulfilled]: (state, action) =>  action.payload
-})
+}) 
+//TODO implementar que la movie sea vacia cuando está pending así no aparece la movie anterior
 
 //---------------------------------------------------------------------------//
 
