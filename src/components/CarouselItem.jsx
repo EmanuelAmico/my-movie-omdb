@@ -23,8 +23,10 @@ const CarouselItem = (props) => {
   useEffect(() => {
     dispatch(getFavoriteMovies(user))
   }, [])
+    
+  
 
-  //TODO Si yo desestructuro las props arriba abajo llegan undefined ´-´
+  // Si yo desestructuro las props arriba abajo llegan undefined ´-´
   const handleSetFavorite = async () => {
     try {
       /* console.log("props -> ", props)
@@ -47,8 +49,15 @@ const CarouselItem = (props) => {
     }
   }
 
-  const handleDeleteFavorite = e => {
-
+  const handleDeleteFavorite = async () => {
+    try {
+      const server = generateAxios(user.token)
+      await server.delete(`/users/favorites/${props.imdbID}`)
+      const filteredMovies = favoriteMovies.filter(movie => movie.imdbID !== props.imdbID)
+      dispatch(setFavoriteMovies(filteredMovies))
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleClick = () => {

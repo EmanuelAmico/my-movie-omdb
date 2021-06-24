@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Carousel from "../components/Carousel";
 import CarouselItem from "../components/CarouselItem";
 import NotFound from './NotFound';
@@ -18,11 +18,10 @@ const SearchResults = () => {
           <Carousel title="Resultados de la búsqueda">
             {movies.map( movie => <CarouselItem key={movie.imdbID} {...movie} isMyList={false}/>)}
           </Carousel>
-          {favoriteMovies.lenght &&
+          {favoriteMovies.length && 
           <Carousel title="Mis películas favoritas" >
             {favoriteMovies.map( movie => <CarouselItem key={movie.imdbID} {...movie} isMyList={true}/>)}
           </Carousel>}
-
         </>
   )
 }
