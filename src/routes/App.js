@@ -7,6 +7,8 @@ import NotFound from "../components/NotFound";
 import Layout from "../components/Layout";
 import SearchResults from "../components/SearchResults";
 import CarouselItemDetail from "../components/CarouselItemDetail";
+import Users from "../components/Users";
+import UserDetails from "../containers/UserDetails";
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
         <Switch>
           <Route exact path="/movies/:imdbID" component={CarouselItemDetail} />
           <Route exact path="/movies" component={SearchResults} />
+          <Route exact path="/users" component={Users} />
+          <Route exact path="/users/:userId" component={UserDetails} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/" component={Home} />

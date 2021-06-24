@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory, useLocation, useRouteMatch } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import playIcon from '../assets/static/play-icon.png'
 import plusIcon from '../assets/static/plus-icon.png'
 import removeIcon from '../assets/static/remove-icon.png'
@@ -11,10 +11,10 @@ import { getSpecificMovie } from '../redux/movies'
 import generateAxios from '../utils/generateAxios'
 
 const CarouselItem = (props) => {
-  const { Title, Year, imdbID, Poster, isMyList} = props
+  const { Title, Year, imdbID, Poster, isUserList} = props
   const history = useHistory()
-  const location = useLocation()
   const dispatch = useDispatch()
+  const match = useRouteMatch()
   const user = useSelector(state => state.user)
   const favoriteMovies = useSelector(state => state.favoriteMovies)
   /* console.log("props -->", props) */
@@ -24,7 +24,6 @@ const CarouselItem = (props) => {
     dispatch(getFavoriteMovies(user))
   }, [])
     
-  
 
   // Si yo desestructuro las props arriba abajo llegan undefined ´-´
   const handleSetFavorite = async () => {
@@ -61,9 +60,8 @@ const CarouselItem = (props) => {
   }
 
   const handleClick = () => {
-    const { pathname } = location
     dispatch(getSpecificMovie(imdbID))
-    history.push(`${pathname}/${imdbID}`)
+    history.push(`/movies/${imdbID}`)
   }
 
   return (
@@ -72,7 +70,7 @@ const CarouselItem = (props) => {
       <div className="carousel-item__details" >
         <div>
             <img className="carousel-item__details--img" src={playIcon} alt="Play Icon"  onClick={handleClick}/> 
-          {isMyList 
+          {isUserList
               ? <img className="carousel-item__details--img" src={removeIcon} alt="remove icon" onClick={() => handleDeleteFavorite(imdbID)}/>
               : <img className="carousel-item__details--img" src={plusIcon} alt="Plus Icon" onClick={handleSetFavorite}/>
           } 

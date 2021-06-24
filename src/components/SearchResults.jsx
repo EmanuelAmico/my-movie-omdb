@@ -16,11 +16,11 @@ const SearchResults = () => {
       ? <NotFound />
       : <>
           <Carousel title="Resultados de la búsqueda">
-            {movies.map( movie => <CarouselItem key={movie.imdbID} {...movie} isMyList={false}/>)}
+            {movies.map( movie => <CarouselItem key={movie.imdbID} {...movie} isUserList={false}/>)}
           </Carousel>
           {favoriteMovies.length && 
           <Carousel title="Mis películas favoritas" >
-            {favoriteMovies.map( movie => <CarouselItem key={movie.imdbID} {...movie} isMyList={true}/>)}
+            {favoriteMovies.map( movie => <CarouselItem key={movie.imdbID} {...movie} isUserList={true}/>)}
           </Carousel>}
         </>
   )

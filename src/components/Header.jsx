@@ -37,6 +37,9 @@ const Header = () => {
       <img className="header__img" src={logo} alt="Platzi Video" />
       <i className="far fa-gem"></i>
     </Link>
+    <Link to="/users">
+      <i className="fas fa-users header__users"></i>
+    </Link>
     <div className="header__menu">
       <div className="header__menu--profile">
         <img src={userIcon} alt="user" />
