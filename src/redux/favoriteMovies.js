@@ -20,7 +20,7 @@ const setFavoriteMovies = createAction('SET_FAVORITE_MOVIES')
 // Reducer
 const favoriteMoviesReducer = createReducer([], {
     [getFavoriteMovies.fulfilled]: (state, action) =>  action.payload,
-    [setFavoriteMovies.fulfilled]: (state, action) => action.payload,
+    [setFavoriteMovies]: (state, action) => action.payload
 })
 //TODO Para que sirve state en el reducer????
 //---------------------------------------------------------------------------//
