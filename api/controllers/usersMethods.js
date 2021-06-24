@@ -6,7 +6,10 @@ const { Users, Movies } = require("../models")
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await Users.findAll()
+    const users = await Users.findAll({include: {
+      model: Movies,
+      as: 'favoriteMovies'
+    }})
     res.status(200).send(users)
   } catch (error) {
     next(error)
