@@ -22,7 +22,7 @@ const CarouselItem = (props) => {
 
   //TODO Preguntar si puedo hacer logica del tipo "si mi componente padre, o el componente que me envuelve es tal hago una cosa y si es tal otro, hago otra cosa"
   
-  //TODO implementar si el usuario no está logueado y intente ingresar a una ruta del front que requiera info privada del back que lo redirija automaticamente a /login
+  //DONE implementar si el usuario no está logueado y intente ingresar a una ruta del front que requiera info privada del back que lo redirija automaticamente a /login
 
   //TODO preguntar como implementar bien eso del query en la barra de direcciones
 
