@@ -19,10 +19,7 @@ const CarouselItem = (props) => {
   const favoriteMovies = useSelector(state => state.favoriteMovies)
   /* console.log("props -->", props) */
 
-  //Para que se llene el estado con las que ya están en la base de datos cuando el componente se monte
-  useEffect(() => {
-    dispatch(getFavoriteMovies(user))
-  }, [])
+  
     
 
   // Si yo desestructuro las props arriba abajo llegan undefined ´-´

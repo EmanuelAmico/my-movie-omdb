@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../assets/static/logo-omdb.svg";
 import userIcon from "../assets/static/user-icon.png";
 import "../assets/styles/components/Header.scss"
+import { getFavoriteMovies } from "../redux/favoriteMovies";
 import { setUser } from "../redux/user";
+import { getUsers } from "../redux/users";
 import generateAxios from "../utils/generateAxios";
 
 const Header = () => { 
   const dispatch = useDispatch()
+  const history = useHistory()
   const user = useSelector(state => state.user)
   const {isLoggedIn, name, email} = user
 
@@ -17,9 +20,14 @@ const Header = () => {
       const server = generateAxios(user.token)
       server.get('/users/me')
         .then(res => res.data)
-        .then(({name, email}) => dispatch(setUser({ ...user, name, email })))
+        .then(({id, name, email}) => dispatch(setUser({ ...user, id, name, email })))
     }
-  }, [isLoggedIn]) 
+  }, [isLoggedIn])
+
+  //Para que se llene el estado con las peliculas favoritas del usuario logueado que ya están en la base de datos, cuando el componente se monte
+  useEffect(() => {
+    dispatch(getFavoriteMovies(user))
+  }, [])
 
   const handleLogOut = () => {
     localStorage.removeItem('userToken')
@@ -28,7 +36,9 @@ const Header = () => {
       name: null,
       email: null,
       token: null,
+      id: null,
     }))
+    history.push('/')
   }
 
   return (
@@ -37,9 +47,10 @@ const Header = () => {
       <img className="header__img" src={logo} alt="Platzi Video" />
       <i className="far fa-gem"></i>
     </Link>
+    {isLoggedIn && 
     <Link to="/users">
       <i className="fas fa-users header__users"></i>
-    </Link>
+    </Link>}
     <div className="header__menu">
       <div className="header__menu--profile">
         <img src={userIcon} alt="user" />
@@ -47,7 +58,7 @@ const Header = () => {
       </div>
       <ul>
         <li>
-          <Link to={isLoggedIn ? "/" : "/login"}>{isLoggedIn ? email : "Cuenta"}</Link>
+          <Link to={isLoggedIn ? `/users/me` : "/login"}>{isLoggedIn ? email : "Cuenta"}</Link>
         </li>
         <li>
           {!isLoggedIn 

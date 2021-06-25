@@ -12,6 +12,7 @@ const getFavoriteMovies = createAsyncThunk('GET_FAVORITES', (user) => {
             .then(res => res.data)
             .then(favoriteMovies => favoriteMovies)
             .catch(error => message.error(`Error: ${error.message}`, 5))
+            //FIXME si a este catch le console.log el error se rompe la app ´-´
 })
 
 // Action

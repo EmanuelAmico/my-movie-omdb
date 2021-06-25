@@ -9,6 +9,7 @@ import SearchResults from "../components/SearchResults";
 import CarouselItemDetail from "../components/CarouselItemDetail";
 import Users from "../components/Users";
 import UserDetails from "../containers/UserDetails";
+import UserCard from "../components/UserCard";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route exact path="/movies" component={SearchResults} />
           <Route exact path="/users" component={Users} />
           <Route exact path="/users/:userId" component={UserDetails} />
+          <Route exact path="/users/:userId/info" component={UserCard} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/" component={Home} />

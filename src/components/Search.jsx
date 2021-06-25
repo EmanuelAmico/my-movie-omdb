@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import '../assets/styles/components/Search.scss'
 import { getMovies } from "../redux/movies";
 
-const Search = (props) => {
+const Search = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();

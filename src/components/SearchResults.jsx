@@ -15,7 +15,7 @@ const SearchResults = () => {
     movies.Error
       ? <NotFound />
       : <>
-          <Carousel title="Resultados de la búsqueda">
+          <Carousel title={movies.length ? `Resultados de la búsqueda` : `No se han encontrado resultados.`}>
             {movies.map( movie => <CarouselItem key={movie.imdbID} {...movie} isUserList={false}/>)}
           </Carousel>
           {favoriteMovies.length && 

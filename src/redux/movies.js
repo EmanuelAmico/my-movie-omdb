@@ -8,7 +8,7 @@ import axios from 'axios'
 const getMovies = createAsyncThunk('GET_MOVIES', (title) => {
    return axios.get(`http://www.omdbapi.com/?apikey=a475d412&s=${title}`)
             .then(res => res.data)
-            .then(movies => {/* console.log(movies); */ return movies.Search})
+            .then(movies => movies.Search ? movies.Search : [])
             .catch(error => message.error(`Error: ${error.message}`, 5))
 })
 
