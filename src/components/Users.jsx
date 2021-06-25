@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { getUsers } from '../redux/users'
 import '../assets/styles/components/Users.scss'
 
@@ -9,6 +9,13 @@ const Users = () => {
   const dispatch = useDispatch()
   const loggedUser = useSelector(state => state.user)
   const users = useSelector(state => state.users)
+  const history = useHistory()
+
+  //Si el usuario no está logueado lo redirecciono
+  if(!loggedUser.isLoggedIn){
+    history.push('/login')
+    return null
+  }
 
   useEffect(() => {
     if(!users.length)
