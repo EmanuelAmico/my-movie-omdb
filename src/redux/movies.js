@@ -1,4 +1,4 @@
-import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import { createReducer, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { message } from "antd";
 import axios from 'axios'
 
@@ -12,9 +12,12 @@ const getMovies = createAsyncThunk('GET_MOVIES', (title) => {
             .catch(error => message.error(`Error: ${error.message}`, 5))
 })
 
+const setMovies = createAction('SET_MOVIES')
+
 // Reducer
 const moviesReducer = createReducer([], {
-    [getMovies.fulfilled]: (state, action) =>  action.payload
+    [getMovies.fulfilled]: (state, action) =>  action.payload,
+    [setMovies] : (state, action) => action.payload
 })
 
 //---------------------------------------------------------------------------//
@@ -27,13 +30,23 @@ const getSpecificMovie = createAsyncThunk('GET_SPECIFIC_MOVIE', (imdbID) => {
            .catch(error => message.error(`Error: ${error.message}`, 5))
 })
 
+const setSelectedMovie = createAction('SET_SELECTED_MOVIE')
+
 // Reducer
 const specificMovieReducer = createReducer({}, {
-  [getSpecificMovie.fulfilled]: (state, action) =>  action.payload
+  [getSpecificMovie.fulfilled]: (state, action) =>  action.payload,
+  [setSelectedMovie] : (state, action) => action.payload
 }) 
 //TODO implementar que la movie sea vacia cuando está pending así no aparece la movie anterior
 
 //---------------------------------------------------------------------------//
 
 
-export { getMovies, moviesReducer, getSpecificMovie, specificMovieReducer }; // action 
+export { 
+  getMovies, 
+  setMovies,
+  moviesReducer,
+  getSpecificMovie,
+  setSelectedMovie,
+  specificMovieReducer
+}; 

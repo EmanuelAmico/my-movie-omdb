@@ -4,9 +4,10 @@ import { Link, useHistory } from "react-router-dom";
 import logo from "../assets/static/logo-omdb.svg";
 import userIcon from "../assets/static/user-icon.png";
 import "../assets/styles/components/Header.scss"
-import { getFavoriteMovies } from "../redux/favoriteMovies";
+import { getFavoriteMovies, setFavoriteMovies } from "../redux/favoriteMovies";
+import { setMovies } from "../redux/movies";
 import { setUser } from "../redux/user";
-import { getUsers } from "../redux/users";
+import { getUsers, setUsers } from "../redux/users";
 import generateAxios from "../utils/generateAxios";
 
 const Header = () => { 
@@ -16,7 +17,7 @@ const Header = () => {
   const {isLoggedIn, name, email} = user
 
   useEffect(() => {
-    if(isLoggedIn) {
+    if(isLoggedIn && !name) {
       const server = generateAxios(user.token)
       server.get('/users/me')
         .then(res => res.data)
@@ -26,7 +27,8 @@ const Header = () => {
 
   //Para que se llene el estado con las peliculas favoritas del usuario logueado que ya están en la base de datos, cuando el componente se monte
   useEffect(() => {
-    dispatch(getFavoriteMovies(user))
+    if(isLoggedIn)
+      dispatch(getFavoriteMovies(user))
   }, [])
 
   const handleLogOut = () => {
@@ -38,6 +40,9 @@ const Header = () => {
       token: null,
       id: null,
     }))
+    dispatch(setUsers([]))
+    dispatch(setFavoriteMovies([]))
+    dispatch(setMovies([]))
     history.push('/')
   }
 

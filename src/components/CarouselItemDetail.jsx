@@ -1,13 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import "../assets/styles/components/CarouselItemDetail.scss"
+import { setMovies, setSelectedMovie } from '../redux/movies'
 
 const CarouselItemDetail = () => {
   const selectedMovie = useSelector(state => state.selectedMovie)
   const {Title, Year, Rated, Runtime, Director, Actors, Plot, Poster} = selectedMovie
   
+  const dispatch = useDispatch()
   const history = useHistory()
+
+  //Este funciona como componentDidUnmount()
+  useEffect(() => () => {
+    dispatch(setSelectedMovie({}))
+  }, [])
 
   const handleClick = () => {
     history.goBack()

@@ -25,8 +25,6 @@ const CarouselItem = (props) => {
   // Si yo desestructuro las props arriba abajo llegan undefined ´-´
   const handleSetFavorite = async () => {
     try {
-      /* console.log("props -> ", props)
-      console.log("Title -->", Title) */
       const response = await axios.get(`http://www.omdbapi.com/?apikey=a475d412&i=${props.imdbID}`)
       const specificMovie = response.data
       const { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster } = specificMovie

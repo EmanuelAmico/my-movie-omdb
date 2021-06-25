@@ -2,14 +2,17 @@ import React, { useEffect } from 'react';
 import Carousel from "../components/Carousel";
 import CarouselItem from "../components/CarouselItem";
 import NotFound from './NotFound';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setMovies } from '../redux/movies';
 
 
 const SearchResults = () => {
 
+  const dispatch = useDispatch()
   const movies = useSelector(state => state.movies)
   const favoriteMovies = useSelector(state => state.favoriteMovies)
   
+
   //TODO preguntar por qué esto no funca y como podría hacer para fixearlo
   return (
     movies.Error

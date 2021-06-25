@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import googleIcon from "../assets/static/google-icon.png"
 import twitterIcon from "../assets/static/twitter-icon.png"
 import "../assets/styles/components/Login.scss"
+import { getFavoriteMovies } from '../redux/favoriteMovies';
 import { setUser } from '../redux/user';
 
 const Login = () => {
@@ -24,10 +25,11 @@ const Login = () => {
     const { email, password, rememberMe } = form
     axios.post('/api/login', { email, password })
       .then(res => res.data)
-      .then(({ token }) => {
+      .then(({ id, name, email, token }) => {
         if(rememberMe)
           localStorage.setItem('userToken', token)
-        dispatch(setUser({ ...user, isLoggedIn: true, token }))
+        dispatch(setUser({ ...user, id, name, email, token, isLoggedIn: true }))
+        dispatch(getFavoriteMovies({ token }))
         alert("Se ha logueado con éxito.")
         history.push('/')
       })

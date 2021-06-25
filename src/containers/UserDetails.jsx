@@ -7,14 +7,21 @@ import CarouselItem from '../components/CarouselItem'
 import UserCard from '../components/UserCard'
 
 const UserDetails = () => {
-  const match = useRouteMatch()
+
   const loggedUser = useSelector (state => state.user)
-  let favoriteMovies
-  if(match.url === '/users/me'){
+
+  let user, users, favoriteMovies
+  
+  const match = useRouteMatch()
+
+  if (match.url === '/users/me') {
+    user = {...loggedUser}
     favoriteMovies = useSelector(state => state.favoriteMovies)
+    user.favoriteMovies = [...favoriteMovies]
+    
   } else {
-    const users = useSelector(state => state.users)
-    const user = users.filter(user => user.id === Number(match.params.userId))[0]
+    users = useSelector(state => state.users)
+    user = users.filter(user => user.id === Number(match.params.userId))[0]
     favoriteMovies = user.favoriteMovies
   }
   

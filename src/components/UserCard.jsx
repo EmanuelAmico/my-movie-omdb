@@ -5,9 +5,16 @@ import profilePicture from '../assets/static/user-icon.png'
 
 const UserCard = () => {
   const match = useRouteMatch()
-  const users = useSelector(state => state.users)
-  const user = users.filter(user => user.id === Number(match.params.userId))[0]
-
+  const loggedUser = useSelector(state => state.user)
+  
+  let user
+  if (match.url === `/users/${loggedUser.id}/info`) {
+    user = loggedUser
+  } else {
+    const users = useSelector(state => state.users)
+    user = users.filter(user => user.id === Number(match.params.userId))[0]
+  }
+    
   return (
     <>
       <section className="login">

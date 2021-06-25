@@ -9,6 +9,7 @@ const Carousel = ({ children, title, user}) => {
           <h3 className="carousel__title">{title}</h3>
           <div className="carousel__container">{children}</div>
         </section>
+      //--------------------------------------------------------------//  
       : <section className="carousel">
           <h3 className="carousel__title">
             {

@@ -1,13 +1,19 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import '../assets/styles/components/Search.scss'
-import { getMovies } from "../redux/movies";
+import { getMovies, setMovies } from "../redux/movies";
 
 const Search = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
+  const movies = useSelector(state => state.movies)
+
+  useEffect(() => {
+    if(movies.length)
+      dispatch(setMovies([]))
+  }, [])
 
   const handleChange = e => {
     const title = e.target.value

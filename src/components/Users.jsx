@@ -7,18 +7,19 @@ import '../assets/styles/components/Users.scss'
 const Users = () => {
 
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user)
+  const loggedUser = useSelector(state => state.user)
   const users = useSelector(state => state.users)
 
   useEffect(() => {
-    dispatch(getUsers(user.token))
+    if(!users.length)
+      dispatch(getUsers(loggedUser.token))
   }, [])
 
   return (
     <div className="users">
       <h2>Usuarios</h2>
       <ul>
-        {users.map(user => <Link to={`/users/${user.id}`} key={user.id} ><li>{user.name}</li></Link>)}
+        {users.map(user => <Link to={`/users/${user.id === loggedUser.id ? "me" : user.id}`} key={user.id} ><li>{user.name}</li></Link>)}
       </ul>
     </div>
   )
