@@ -30,7 +30,7 @@ const CarouselItem = (props) => {
   const handleSetFavorite = async () => {
     try {
       if (match.path === '/movies') {
-        const response = await axios.get(`http://www.omdbapi.com/?apikey=a475d412&i=${props.imdbID}`)
+        const response = await axios.get(`https://www.omdbapi.com/?apikey=a475d412&i=${props.imdbID}`)
         const specificMovie = response.data
         const { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster } = specificMovie
         const newFavoriteMovie = { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster }
