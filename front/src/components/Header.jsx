@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import logo from "../assets/static/logo-omdb.svg";
-import userIcon from "../assets/static/user-icon.png";
-import "../assets/styles/components/Header.scss"
 import { getFavoriteMovies, setFavoriteMovies } from "../redux/favoriteMovies";
 import { setMovies } from "../redux/movies";
 import { setUser } from "../redux/user";
 import { getUsers, setUsers } from "../redux/users";
 import generateAxios from "../utils/generateAxios";
+import logo from "../assets/static/logo-omdb.svg";
+import userIcon from "../assets/static/user-icon.png";
+import "../assets/styles/components/Header.scss"
 
 const Header = () => { 
   const dispatch = useDispatch()

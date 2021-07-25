@@ -8,7 +8,7 @@ const Register = () => {
   const history = useHistory()
 
   const [form, setForm] = useState({
-    name: "",
+    name: "pepito",
     email: "",
     password: "",
   })

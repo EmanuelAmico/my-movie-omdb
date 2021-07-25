@@ -37,7 +37,7 @@ const CarouselItem = (props) => {
         const server = generateAxios(user.token)
         await server.post('/users/favorites', newFavoriteMovie)
         //NOTE yo supongo que si el post de arriba dio error entonces se para la ejecucion y entra en el catch, o sea lo de acá abajo no se debería ejecutar si hubo algun error en la linea de arriba
-        alert("Se ha agregado la pelicula a favoritos.")
+        /* alert("Se ha agregado la pelicula a favoritos.") */
         dispatch(setFavoriteMovies([...favoriteMovies, newFavoriteMovie]))
         //FIXED El dispatch este no cambia el estado, no se por que.. :C, o sea el payload está perfecto pero no cambia el estado. Investigar como hacer dos action para un mismo reducer.. quizás es eso :C
         //NOTE La solución era que estaba tomando el action como una action asincrónica le estaba poniendo     [setFavoriteMovies.fulfilled]: (state, action) => action.payload ...... cuando en realidad el fulfilled solo es para las promesas :' )

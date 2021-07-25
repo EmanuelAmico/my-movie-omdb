@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken")
+const { Op } = require("sequelize")
 const { Users, Movies } = require("../models")
 
 
@@ -6,10 +7,17 @@ const { Users, Movies } = require("../models")
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await Users.findAll({include: {
+    const { userId } = req.tokenPayload
+    const users = await Users.findAll({
+    where: {
+      [Op.not] : {id: userId}
+    }, 
+    include: {
       model: Movies,
-      as: 'favoriteMovies'
-    }})
+      as: 'favoriteMovies',
+    },
+    attributes: { exclude: ['password', 'salt'] }
+    })
     res.status(200).send(users)
   } catch (error) {
     next(error)
@@ -19,7 +27,10 @@ const getUsers = async (req, res, next) => {
 const getSelf = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload
-    const user = await Users.findByPk(userId)
+    const user = await Users.findOne({
+      where: { id: userId },
+      attributes: { exclude: ['password', 'salt'] }
+    })
     res.status(200).send(user)
   } catch (error) {
     next(error)

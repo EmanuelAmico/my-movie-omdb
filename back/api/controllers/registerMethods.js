@@ -13,7 +13,8 @@ const postRegisterUser = async (req, res, next) => {
       res.status(302).send("The user already exists")
     } else {
       const createdUser = await Users.create(req.body)
-      res.status(201).send(createdUser)
+      const { id, name, email } = createdUser
+      res.status(201).send({ id, name, email })
     }
   } catch (error) {
     next(error)
