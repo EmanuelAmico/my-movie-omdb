@@ -6,7 +6,7 @@ import axios from 'axios'
 
 // Action
 const getMovies = createAsyncThunk('GET_MOVIES', (title) => {
-   return axios.get(`http://www.omdbapi.com/?apikey=a475d412&s=${title}`)
+   return axios.get(`https://www.omdbapi.com/?apikey=a475d412&s=${title}`)
             .then(res => res.data)
             .then(movies => movies.Search ? movies.Search : [])
             .catch(error => message.error(`Error: ${error.message}`, 5))
@@ -24,7 +24,7 @@ const moviesReducer = createReducer([], {
 
 // Action
 const getSpecificMovie = createAsyncThunk('GET_SPECIFIC_MOVIE', (imdbID) => {
-  return axios.get(`http://www.omdbapi.com/?apikey=a475d412&i=${imdbID}`)
+  return axios.get(`https://www.omdbapi.com/?apikey=a475d412&i=${imdbID}`)
            .then(res => res.data)
            .then(movie => movie)
            .catch(error => message.error(`Error: ${error.message}`, 5))
