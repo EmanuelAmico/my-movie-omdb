@@ -15,8 +15,6 @@ const SearchResults = () => {
   
   const history = useHistory()
 
-  console.log(history)
-
   //TODO preguntar por qué esto no funca y como podría hacer para fixearlo
   return (
     movies.Error

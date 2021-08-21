@@ -9,6 +9,7 @@ import generateAxios from "../utils/generateAxios";
 import logo from "../assets/static/logo-omdb.svg";
 import userIcon from "../assets/static/user-icon.png";
 import "../assets/styles/components/Header.scss"
+import API_URL from "../config/env";
 
 const Header = () => { 
   const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const Header = () => {
   useEffect(() => {
     if(isLoggedIn && !name) {
       const server = generateAxios(user.token)
-      server.get('/users/me')
+      server.get(`${API_URL}/users/me`)
         .then(res => res.data)
         .then(({id, name, email}) => dispatch(setUser({ ...user, id, name, email })))
     }

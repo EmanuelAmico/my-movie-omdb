@@ -6,6 +6,7 @@ import playIcon from '../assets/static/play-icon.png'
 import plusIcon from '../assets/static/plus-icon.png'
 import removeIcon from '../assets/static/remove-icon.png'
 import '../assets/styles/components/CarouselItem.scss'
+import API_URL from '../config/env'
 import { getFavoriteMovies, setFavoriteMovies } from '../redux/favoriteMovies'
 import { getSpecificMovie, setSelectedMovie } from '../redux/movies'
 import generateAxios from '../utils/generateAxios'
@@ -35,7 +36,7 @@ const CarouselItem = (props) => {
         const { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster } = specificMovie
         const newFavoriteMovie = { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster }
         const server = generateAxios(user.token)
-        await server.post('/users/favorites', newFavoriteMovie)
+        await server.post(`${API_URL}/api/users/favorites`, newFavoriteMovie)
         //NOTE yo supongo que si el post de arriba dio error entonces se para la ejecucion y entra en el catch, o sea lo de acá abajo no se debería ejecutar si hubo algun error en la linea de arriba
         /* alert("Se ha agregado la pelicula a favoritos.") */
         dispatch(setFavoriteMovies([...favoriteMovies, newFavoriteMovie]))
@@ -48,7 +49,7 @@ const CarouselItem = (props) => {
         const { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster } = specificMovie
         const newFavoriteMovie = { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster }
         const server = generateAxios(user.token)
-        await server.post('/users/favorites', newFavoriteMovie)
+        await server.post(`${API_URL}/users/favorites`, newFavoriteMovie)
         dispatch(setFavoriteMovies([...favoriteMovies, newFavoriteMovie]))
       }
     } catch (error) {
@@ -62,7 +63,7 @@ const CarouselItem = (props) => {
   const handleDeleteFavorite = async () => {
     try {
       const server = generateAxios(user.token)
-      await server.delete(`/users/favorites/${props.imdbID}`)
+      await server.delete(`${API_URL}/api/users/favorites/${props.imdbID}`)
       const filteredMovies = favoriteMovies.filter(movie => movie.imdbID !== props.imdbID)
       dispatch(setFavoriteMovies(filteredMovies))
     } catch (error) {
