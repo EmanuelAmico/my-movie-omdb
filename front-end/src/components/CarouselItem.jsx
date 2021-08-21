@@ -19,7 +19,6 @@ const CarouselItem = (props) => {
   const user = useSelector(state => state.user)
   const users = useSelector(state => state.users)
   const favoriteMovies = useSelector(state => state.favoriteMovies)
-  /* console.log("props -->", props) */
 
   //TODO Preguntar si puedo hacer logica del tipo "si mi componente padre, o el componente que me envuelve es tal hago una cosa y si es tal otro, hago otra cosa"
   

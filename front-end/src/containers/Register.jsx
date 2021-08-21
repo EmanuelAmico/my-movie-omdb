@@ -16,7 +16,6 @@ const Register = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    /* console.log(form) */
     axios.post(`${API_URL}/api/register`, form)
       .then(res => res.data)
       .then(user => {
