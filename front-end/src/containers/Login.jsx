@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import googleIcon from "../assets/static/google-icon.png"
 import twitterIcon from "../assets/static/twitter-icon.png"
 import "../assets/styles/components/Login.scss"
+import API_URL from '../config/env';
 import { getFavoriteMovies } from '../redux/favoriteMovies';
 import { setUser } from '../redux/user';
 
@@ -23,7 +24,7 @@ const Login = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const { email, password, rememberMe } = form
-    axios.post('/api/login', { email, password })
+    axios.post(`${API_URL}/api/login`, { email, password })
       .then(res => res.data)
       .then(({ id, name, email, token }) => {
         if(rememberMe)
