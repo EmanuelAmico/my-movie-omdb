@@ -73,9 +73,9 @@ const deleteFavoriteMovie = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload;
     const { imdbID } = req.params;
-    const movie = await Movies.findOne({ _id: imdbID, user: userId }).exec();
+    const movie = await Movies.findOne({ imdbID, user: userId }).exec();
     if (movie) {
-      const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { $pull: { movies: imdbID } }, { new: true }).exec()
+      const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { $pull: { movies: movie._id } }, { new: true }).exec()
       const destroyedMovie = await movie.delete();
       res.status(200).send(destroyedMovie);
     } else {
