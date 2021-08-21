@@ -74,3 +74,12 @@ yarn-error.log
 
 # Build
 dist/
+
+# Env variables
+*.env
+
+# Bash files
+*.bash
+
+# Certificates
+certs/

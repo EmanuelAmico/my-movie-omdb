@@ -8,7 +8,7 @@ const postLoginUser = async (req, res, next) => {
     //chequear si el usuario es valido, en caso de que el usuario es correcto -> genero el token
     const { email, password } = req.body
     //evaluamos el email
-    const user = await Users.findOne({where: {email}})
+    const user = await Users.findOne({ email })
     if(!user) 
       return res.status(400).send("User does not exist")
       
