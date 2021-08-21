@@ -1,5 +1,6 @@
 import { createReducer, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import { message } from "antd";
+import API_URL from "../config/env";
 import generateAxios from "../utils/generateAxios";
 
 
@@ -8,7 +9,7 @@ import generateAxios from "../utils/generateAxios";
 // Action
 const getFavoriteMovies = createAsyncThunk('GET_FAVORITES', (user) => {
   const server = generateAxios(user.token)
-  return server.get('/users/favorites')
+  return server.get(`${API_URL}/users/favorites`)
             .then(res => res.data)
             .then(favoriteMovies => favoriteMovies)
             .catch(error => message.error(`Error: ${error.message}`, 5))

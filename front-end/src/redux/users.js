@@ -1,4 +1,5 @@
 import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import API_URL from "../config/env";
 import generateAxios from "../utils/generateAxios";
 
 //---------------------------------------------------------------------------//
@@ -9,7 +10,7 @@ const setUsers = createAction("SET_USERS")
 const getUsers = createAsyncThunk('GET_USERS', async (token) => {
   try {
     const server = generateAxios(token)
-    const response = await server.get('/users')
+    const response = await server.get(`${API_URL}/users`)
     const users = response.data
     return users
   } catch (error) {
