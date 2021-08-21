@@ -43,6 +43,6 @@ const skillSchema = new mongoose.Schema({
   },
 });
 
-const Movies = mongoose.model("Movies", skillSchema);
+const Movies = mongoose.model("movies", skillSchema);
 
 module.exports = Movies;

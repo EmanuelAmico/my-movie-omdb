@@ -5,10 +5,10 @@ const { Users, Movies } = require("../models");
 const getUsers = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload;
-    const users = await Users.find({ $not: { _id: userId } })
+    const users = await Users.find({ _id: { $ne: userId } })
       .populate("movies")
-      .exec()
-      .select("-password");
+      .select("-password")
+      .exec();
     res.status(200).send(users);
   } catch (error) {
     next(error);
@@ -18,7 +18,7 @@ const getUsers = async (req, res, next) => {
 const getSelf = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload;
-    const user = await Users.findOne({ _id: userId }).exec().select("-password");
+    const user = await Users.findOne({ _id: userId }).select("-password").exec();
     res.status(200).send(user);
   } catch (error) {
     next(error);
@@ -28,7 +28,7 @@ const getSelf = async (req, res, next) => {
 const getSelfFavoriteMovies = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload;
-    const favoriteMovies = await Movies.findAll({ user: userId }).exec();
+    const favoriteMovies = await Movies.find({ user: userId }).exec();
     res.status(200).send(favoriteMovies);
   } catch (error) {
     next(error);
@@ -50,17 +50,17 @@ const getFavoriteMovies = async (req, res, next) => {
 const postFavoriteMovie = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload;
-    req.body.userId = userId;
+    req.body.user = userId
     const movie = req.body;
     const { imdbID } = movie;
-    const alreadyExists = await Movies.findOne({ $and: { userId, imdbID } }).exec();
+    const alreadyExists = await Movies.findOne({ userId, imdbID }).exec();
     if (alreadyExists) {
       res
         .status(302)
         .send("The user has already added that movie to its favorites");
     } else {
-      const newFavoriteMovie = await Movies.create(movie).exec();
-      await Users.findOneAndUpdate({ _id: userId }, { $push: {movies: newFavoriteMovie} }, {new: true}).exec()
+      const newFavoriteMovie = await Movies.create(movie);
+      await Users.findOneAndUpdate({ _id: userId }, { $push: {movies: newFavoriteMovie } }, {new: true}).exec()
       res.status(201).send(newFavoriteMovie);
     }
   } catch (error) {
@@ -73,11 +73,11 @@ const deleteFavoriteMovie = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload;
     const { imdbID } = req.params;
-    const movie = await Movies.findOne({ $and: { userId, imdbID } }).exec();
+    const movie = await Movies.findOne({ _id: imdbID, user: userId }).exec();
     if (movie) {
       const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { $pull: { movies: imdbID } }, { new: true }).exec()
       const destroyedMovie = await movie.delete();
-      res.status(200).send(destroyedMovie); //hacer ternario
+      res.status(200).send(destroyedMovie);
     } else {
       res
         .status(404)

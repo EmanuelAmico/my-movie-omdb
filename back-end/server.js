@@ -37,5 +37,5 @@ connection.on("error", console.error.bind(console, "connection error:"))
 
 connection.once("open", () => {
   console.log("Connectado a la DB")
-  app.listen(port, () => console.log(`Server conectado y escuchando en Cluster`))
+  app.listen(port, () => console.log(`Server escuchando en http://localhost:${port} y DB escuchando en Cluster`))
 })

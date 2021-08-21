@@ -41,7 +41,7 @@ userSchema.pre("save", function (next) {
   } else return next();
 });
 
-userSchema.methods.comparePassword = function (password) {
+userSchema.methods.validPassword = function (password) {
   return bcrypt.compare(password, this.password).then((res) => {
     return res;
   });
@@ -51,6 +51,6 @@ userSchema.virtual("disponible").get(function () {
   return this.mentees.length < this.maxMentees;
 });
 
-const Users = mongoose.model("Users", userSchema);
+const Users = mongoose.model("users", userSchema);
 
 module.exports = Users;

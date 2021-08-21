@@ -8,11 +8,12 @@ const postRegisterUser = async (req, res, next) => {
   try {
     const user = req.body
     const { email } = user
-    const alreadyExists = await Users.findOne({ email })
+    const alreadyExists = await Users.findOne({ email }).exec()
+    console.log(alreadyExists)
     if(alreadyExists) {
       res.status(302).send("The user already exists")
     } else {
-      const createdUser = await Users.create(req.body).exec()
+      const createdUser = await Users.create(req.body)
       const { id, name, email } = createdUser
       res.status(201).send({ id, name, email })
     }
