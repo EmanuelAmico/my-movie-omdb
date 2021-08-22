@@ -53,7 +53,7 @@ const postFavoriteMovie = async (req, res, next) => {
     req.body.user = userId
     const movie = req.body;
     const { imdbID } = movie;
-    const alreadyExists = await Movies.findOne({ userId, imdbID }).exec();
+    const alreadyExists = await Movies.findOne({ user: userId, imdbID }).exec();
     if (alreadyExists) {
       res
         .status(302)
