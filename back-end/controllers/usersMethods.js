@@ -6,7 +6,7 @@ const getUsers = async (req, res, next) => {
   try {
     const { userId } = req.tokenPayload;
     const users = await Users.find({ _id: { $ne: userId } })
-      .populate("movies")
+      .populate("favoriteMovies")
       .select("-password")
       .exec();
     res.status(200).send(users);

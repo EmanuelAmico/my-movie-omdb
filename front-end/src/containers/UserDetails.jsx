@@ -28,7 +28,7 @@ const UserDetails = () => {
     user.favoriteMovies = [...favoriteMovies]
   } else {
     users = useSelector(state => state.users)
-    user = users.filter(user => user._id === Number(match.params.userId))[0]
+    user = users.filter(user => user._id === match.params.userId)[0]
     favoriteMovies = user.favoriteMovies
   }
   
