@@ -20,7 +20,7 @@ const Header = () => {
   useEffect(() => {
     if(isLoggedIn && !name) {
       const server = generateAxios(user.token)
-      server.get(`${API_URL}/users/me`)
+      server.get(`${API_URL}/api/users/me`)
         .then(res => res.data)
         .then(({id, name, email}) => dispatch(setUser({ ...user, id, name, email })))
     }

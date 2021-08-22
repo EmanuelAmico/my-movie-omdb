@@ -48,7 +48,7 @@ const CarouselItem = (props) => {
         const { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster } = specificMovie
         const newFavoriteMovie = { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster }
         const server = generateAxios(user.token)
-        await server.post(`${API_URL}/users/favorites`, newFavoriteMovie)
+        await server.post(`${API_URL}/api/users/favorites`, newFavoriteMovie)
         dispatch(setFavoriteMovies([...favoriteMovies, newFavoriteMovie]))
       }
     } catch (error) {

@@ -10,7 +10,7 @@ const setUsers = createAction("SET_USERS")
 const getUsers = createAsyncThunk('GET_USERS', async (token) => {
   try {
     const server = generateAxios(token)
-    const response = await server.get(`${API_URL}/users`)
+    const response = await server.get(`${API_URL}/api/users`)
     const users = response.data
     return users
   } catch (error) {
