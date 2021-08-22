@@ -42,8 +42,8 @@ const CarouselItem = (props) => {
         //FIXED El dispatch este no cambia el estado, no se por que.. :C, o sea el payload está perfecto pero no cambia el estado. Investigar como hacer dos action para un mismo reducer.. quizás es eso :C
         //NOTE La solución era que estaba tomando el action como una action asincrónica le estaba poniendo     [setFavoriteMovies.fulfilled]: (state, action) => action.payload ...... cuando en realidad el fulfilled solo es para las promesas :' )
       } else { //-> estoy parado en /users/:userId o en /users/me
-        const targetUserId = match.url === '/users/me' ? user.id : match.params.userId
-        const targetUser = users.filter(user => user.id === Number(targetUserId))[0]
+        const targetUserId = match.url === '/users/me' ? user._id : match.params.userId
+        const targetUser = users.filter(user => user._id === Number(targetUserId))[0]
         const specificMovie = targetUser.favoriteMovies.filter(movie => movie.imdbID === props.imdbID)[0]
         const { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster } = specificMovie
         const newFavoriteMovie = { imdbID, Title, Year, Rated, Runtime, Director, Actors, Plot, Poster }
@@ -77,8 +77,8 @@ const CarouselItem = (props) => {
       const specificMovie = favoriteMovies.filter(movie => movie.imdbID === imdbID)[0]
       dispatch(setSelectedMovie(specificMovie))
     } else { //-> estoy parado en /users/:userId
-      const targetUserId = match.url === '/users/me' ? user.id : match.params.userId
-      const targetUser = users.filter(user => user.id === Number(targetUserId))[0]
+      const targetUserId = match.url === '/users/me' ? user._id : match.params.userId
+      const targetUser = users.filter(user => user._id === Number(targetUserId))[0]
       const specificMovie = targetUser.favoriteMovies.filter(movie => movie.imdbID === imdbID)[0]
       dispatch(setSelectedMovie(specificMovie))
     }

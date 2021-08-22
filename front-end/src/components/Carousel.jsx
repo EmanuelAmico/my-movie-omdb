@@ -14,7 +14,7 @@ const Carousel = ({ children, title, user}) => {
           <h3 className="carousel__title">
             {
               user.favoriteMovies.length 
-                ? <>Lista de favoritos de <Link to={`/users/${user.id}/info`}>{user.name}</Link></>
+                ? <>Lista de favoritos de <Link to={`/users/${user._id}/info`}>{user.name}</Link></>
                 : `${user.name} no tiene películas en sus favoritos.`
             }
           </h3>

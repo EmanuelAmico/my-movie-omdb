@@ -16,11 +16,11 @@ const UserCard = () => {
   }
   
   let user
-  if (match.url === `/users/${loggedUser.id}/info`) {
+  if (match.url === `/users/${loggedUser._id}/info`) {
     user = loggedUser
   } else {
     const users = useSelector(state => state.users)
-    user = users.filter(user => user.id === Number(match.params.userId))[0]
+    user = users.filter(user => user._id === Number(match.params.userId))[0]
   }
     
   return (

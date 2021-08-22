@@ -26,7 +26,7 @@ const Users = () => {
     <div className="users">
       <h2>Usuarios</h2>
       <ul>
-        {users.map(user => <Link to={`/users/${user.id === loggedUser.id ? "me" : user.id}`} key={user.id} ><li>{user.name}</li></Link>)}
+        {users.map(user => <Link to={`/users/${user._id === loggedUser._id ? "me" : user._id}`} key={user._id} ><li>{user.name}</li></Link>)}
       </ul>
     </div>
   )
