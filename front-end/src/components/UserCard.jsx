@@ -20,7 +20,7 @@ const UserCard = () => {
     user = loggedUser
   } else {
     const users = useSelector(state => state.users)
-    user = users.filter(user => user._id === Number(match.params.userId))[0]
+    user = users.filter(user => user._id === match.params.userId)[0]
   }
     
   return (
