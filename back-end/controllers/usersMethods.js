@@ -60,7 +60,7 @@ const postFavoriteMovie = async (req, res, next) => {
         .send("The user has already added that movie to its favorites");
     } else {
       const newFavoriteMovie = await Movies.create(movie);
-      await Users.findOneAndUpdate({ _id: userId }, { $push: {movies: newFavoriteMovie } }, {new: true}).exec()
+      const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { $push: {movies: newFavoriteMovie } }, {new: true}).exec()
       res.status(201).send(newFavoriteMovie);
     }
   } catch (error) {
