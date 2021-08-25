@@ -28,7 +28,7 @@ const UserDetails = () => {
     user.favoriteMovies = [...favoriteMovies]
   } else {
     users = useSelector(state => state.users)
-    user = users.filter(user => user.id === Number(match.params.userId))[0]
+    user = users.filter(user => user._id === match.params.userId)[0]
     favoriteMovies = user.favoriteMovies
   }
   
@@ -37,7 +37,7 @@ const UserDetails = () => {
     <>
       <a href="#back" className="search__results-goBackIcon" onClick={() => history.goBack()}><i className="far fa-arrow-alt-circle-left"></i></a>
       <Carousel user={user} >
-        {favoriteMovies.map(movie => <CarouselItem key={movie.imdbID} isUserList={user.name === loggedUser.name } {...movie}/>)}
+        {favoriteMovies.map(movie => <CarouselItem key={movie.imdbID} isUserList={user.name === loggedUser.name} {...movie}/>)}
       </Carousel>
     </>
   )

@@ -3,8 +3,9 @@ import Carousel from "../components/Carousel";
 import CarouselItem from "../components/CarouselItem";
 import NotFound from './NotFound';
 import { useDispatch, useSelector } from "react-redux";
-import { setMovies } from '../redux/movies';
+import { getMovies, setMovies } from '../redux/movies';
 import { useHistory } from 'react-router-dom';
+import queryString from 'query-string'
 import "../assets/styles/components/SearchResults.scss"
 
 const SearchResults = () => {
@@ -14,10 +15,11 @@ const SearchResults = () => {
   const favoriteMovies = useSelector(state => state.favoriteMovies)
   
   const history = useHistory()
+  useEffect(() =>{
+    const query = queryString.parse(history.location.search)
+    dispatch(getMovies(query.title))
+  }, [])
 
-  console.log(history)
-
-  //TODO preguntar por qué esto no funca y como podría hacer para fixearlo
   return (
     movies.Error
       ? <NotFound />

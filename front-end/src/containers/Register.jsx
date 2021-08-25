@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import "../assets/styles/components/Register.scss"
+import API_URL from '../config/env'
 
 const Register = () => {
   const history = useHistory()
@@ -15,8 +16,7 @@ const Register = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    /* console.log(form) */
-    axios.post('/api/register', form)
+    axios.post(`${API_URL}/api/register`, form)
       .then(res => res.data)
       .then(user => {
         alert("El usuario se creó con éxito.")
