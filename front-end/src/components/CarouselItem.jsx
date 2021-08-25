@@ -42,10 +42,10 @@ const CarouselItem = ({ Title, Year, imdbID, Poster, isUserList }) => {
           Poster: specificMovie.Poster,
         };
         const server = generateAxios(user.token);
-        const updatedFavoriteMovies = await server.post(
+        const updatedFavoriteMovies = (await server.post(
           `${API_URL}/api/users/favorites`,
           newFavoriteMovie
-        );
+        )).data;
         dispatch(setFavoriteMovies(updatedFavoriteMovies));
       } else {
         //-> estoy parado en /users/:userId o en /users/me
@@ -67,10 +67,10 @@ const CarouselItem = ({ Title, Year, imdbID, Poster, isUserList }) => {
           Poster: specificMovie.Poster,
         };
         const server = generateAxios(user.token);
-        const updatedFavoriteMovies = await server.post(
+        const updatedFavoriteMovies = (await server.post(
           `${API_URL}/api/users/favorites`,
           newFavoriteMovie
-        );
+        )).data;
         dispatch(setFavoriteMovies(updatedFavoriteMovies));
       }
     } catch (error) {
