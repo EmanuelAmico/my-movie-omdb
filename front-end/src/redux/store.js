@@ -1,11 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { favoriteMoviesReducer } from './favoriteMovies';
-import { moviesReducer, specificMovieReducer } from './movies';
-import { userReducer } from './user';
-import { usersReducer } from './users';
+import { configureStore } from "@reduxjs/toolkit";
+import { favoriteMoviesReducer } from "./favoriteMovies";
+import { moviesReducer, specificMovieReducer } from "./movies";
+import { userReducer } from "./user";
+import { usersReducer } from "./users";
 
 const store = configureStore({
-  reducer: { //esto representa a la store de estados
+  reducer: {
+    //esto representa a la store de estados
     movies: moviesReducer,
     selectedMovie: specificMovieReducer,
     user: userReducer,
@@ -14,4 +15,4 @@ const store = configureStore({
   },
 });
 
-export default store
+export default store;

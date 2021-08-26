@@ -8,10 +8,10 @@
 }
 
 .register__container {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border: 2px solid white;
   border-radius: 40px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   color: white;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@
   flex-direction: column;
 }
 
-.register__container--form input{
+.register__container--form input {
   width: 100%;
 }
 

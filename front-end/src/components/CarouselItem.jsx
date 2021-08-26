@@ -10,6 +10,7 @@ import API_URL from "../config/env";
 import { setFavoriteMovies } from "../redux/favoriteMovies";
 import { getSpecificMovie, setMovies, setSelectedMovie } from "../redux/movies";
 import generateAxios from "../utils/generateAxios";
+import generateNotification from "../utils/generateNotification";
 
 const CarouselItem = ({ Title, Year, imdbID, Poster, isUserList }) => {
   const history = useHistory();
@@ -42,11 +43,11 @@ const CarouselItem = ({ Title, Year, imdbID, Poster, isUserList }) => {
           Poster: specificMovie.Poster,
         };
         const server = generateAxios(user.token);
-        const updatedFavoriteMovies = (await server.post(
-          `${API_URL}/api/users/favorites`,
-          newFavoriteMovie
-        )).data;
+        const updatedFavoriteMovies = (
+          await server.post(`${API_URL}/api/users/favorites`, newFavoriteMovie)
+        ).data;
         dispatch(setFavoriteMovies(updatedFavoriteMovies));
+        generateNotification("success", "¡Fantástico!", "Se ha agregado esa pelicula a tus favoritos" )
       } else {
         //-> estoy parado en /users/:userId o en /users/me
         const targetUserId =
@@ -67,17 +68,17 @@ const CarouselItem = ({ Title, Year, imdbID, Poster, isUserList }) => {
           Poster: specificMovie.Poster,
         };
         const server = generateAxios(user.token);
-        const updatedFavoriteMovies = (await server.post(
-          `${API_URL}/api/users/favorites`,
-          newFavoriteMovie
-        )).data;
+        const updatedFavoriteMovies = (
+          await server.post(`${API_URL}/api/users/favorites`, newFavoriteMovie)
+        ).data;
         dispatch(setFavoriteMovies(updatedFavoriteMovies));
+        generateNotification("success", "¡Fantástico!", "Se ha agregado la pelicula a tus favoritos" )
       }
     } catch (error) {
       if (error.response.status === 401)
-        return alert("Debes estar logueado para realizar esta acción");
+        return generateNotification("error", "¡Atención!", "Debes estar logueado para realizar esta acción")
       if (error.response.status === 302)
-        return alert("Ya tenés esa pelicula en favoritos");
+        return generateNotification("error", "¡Atención!", "Ya tenés esa pelicula en favoritos");
       console.log(error);
     }
   };
@@ -90,6 +91,7 @@ const CarouselItem = ({ Title, Year, imdbID, Poster, isUserList }) => {
         (movie) => movie.imdbID !== imdbID
       );
       dispatch(setFavoriteMovies(filteredMovies));
+      generateNotification("success", "¡Exitoso!", "Se ha eliminado esa película de sus favoritos")
     } catch (error) {
       console.log(error);
     }

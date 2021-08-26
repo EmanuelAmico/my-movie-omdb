@@ -1,9 +1,7 @@
-const loginMethods = require("./loginMethods")
-const registerMethods = require("./registerMethods")
-const usersMethods = require("./usersMethods")
+const usersMethods = require("./usersMethods");
+const authMethods = require("./authMethods");
 
 module.exports = {
-  ...loginMethods,
-  ...registerMethods,
-  ...usersMethods
-}
+  ...usersMethods,
+  ...authMethods,
+};

@@ -4,9 +4,7 @@ import "../assets/styles/App.scss";
 import axios from "axios";
 
 const Home = () => {
-  return (
-    <Search />
-  );
+  return <Search />;
 };
 
-export default Home
+export default Home;
