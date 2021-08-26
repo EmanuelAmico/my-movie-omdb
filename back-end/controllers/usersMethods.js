@@ -60,8 +60,8 @@ const postFavoriteMovie = async (req, res, next) => {
         .send("The user has already added that movie to its favorites");
     } else {
       const newFavoriteMovie = await Movies.create(movie);
-      await Users.findOneAndUpdate({ _id: userId }, { $push: {movies: newFavoriteMovie } }, {new: true}).exec()
-      res.status(201).send(newFavoriteMovie);
+      const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { $push: { favoriteMovies: newFavoriteMovie } }, {new: true}).populate("favoriteMovies").exec()
+      res.status(201).send(updatedUser.favoriteMovies);
     }
   } catch (error) {
     next(error);
@@ -75,9 +75,9 @@ const deleteFavoriteMovie = async (req, res, next) => {
     const { imdbID } = req.params;
     const movie = await Movies.findOne({ imdbID, user: userId }).exec();
     if (movie) {
-      const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { $pull: { movies: movie._id } }, { new: true }).exec()
+      const updatedUser = await Users.findOneAndUpdate({ _id: userId }, { $pull: { favoriteMovies: movie._id } }, { new: true }).populate("favoriteMovies").exec()
       const destroyedMovie = await movie.delete();
-      res.status(200).send(destroyedMovie);
+      res.status(200).send(updatedUser.favoriteMovies);
     } else {
       res
         .status(404)
