@@ -52,15 +52,18 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header>
       <Link to="/">
         <img className="header__img" src={logo} alt="Platzi Video" />
         <i className="far fa-gem"></i>
       </Link>
       {isLoggedIn && (
-        <Link to="/users">
-          <i className="fas fa-users header__users"></i>
+        <>
+        <Link to="/users" className="header__users">
+          Usuarios
+          <i className="fas fa-users header__users__icon"></i>
         </Link>
+        </>
       )}
       <div className="header__menu">
         <div className="header__menu--profile">

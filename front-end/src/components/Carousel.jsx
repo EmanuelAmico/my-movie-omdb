@@ -3,10 +3,6 @@ import "../assets/styles/components/Carousel.scss";
 import { Link } from "react-router-dom";
 
 const Carousel = ({ children, title, user }) => {
-  const handleScroll = (e) => {
-    console.log(e);
-    console.log("scroll");
-  };
   return title ? (
     <section className="carousel">
       <h3 className="carousel__title">{title}</h3>

@@ -1,6 +1,6 @@
 @import "../Vars.scss";
 
-.header {
+header {
   align-items: center;
   background: $main-color;
   color: white;
@@ -11,14 +11,21 @@
   width: 100%;
 }
 
-.header a {
+header a {
   font-size: 1.6rem;
 }
 
 .header__users {
   color: white;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transform: translate(-37%, 0px);
+}
+
+.header__users__icon {
   font-size: 3rem;
-  transform: translate(-120%, 0px);
+  margin-left: 1.6rem;
+  vertical-align: middle;
 }
 
 .header__img {
